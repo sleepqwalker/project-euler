@@ -1,0 +1,54 @@
+void prostn(vector <long long int>& arr, vector<long long int>& arr1, long long int c) {
+	int a = 0;
+	arr.push_back(2); arr.push_back(3); arr.push_back(5); arr.push_back(7);
+	for (long long int j = 2; j < sqrt(c); j++)
+	{
+		if (j % 2 != 0 && j % 3 != 0 && j % 4 != 0 && j % 5 != 0 && j % 6 != 0 && j % 7 != 0 && j % 8 != 0 && j % 9 != 0)
+			arr.push_back(j);
+	}
+	for ( long long int i = 0; i < arr.size(); i++)
+	{
+		if (c % arr[i] == 0) { arr1.push_back(arr[i]); }
+	}
+	arr.clear();
+	for (long long int j = 0; j < arr1.size(); j++)
+	{
+		a = 0;
+		for (long long int i = 1; i < sqrt(c); i++)
+		{
+			if (arr1[j] % i == 0) { a++; }
+		}
+		if (a == 2)
+			arr.push_back(arr1[j]);
+	}
+}
+
+int main (){ // project euler #3
+	setlocale(LC_ALL, "");
+	int clockbegin,clockend;
+	vector< long long int> arr;
+	vector< long long int> arr1;
+	long long int a = 600851475143;
+
+	clockbegin = clock();
+	prostn(arr,arr1, a);
+	clockend = clock();
+
+	clockend = clockend - clockbegin;
+	cout << clockend << " time " << endl; // 400 ns
+
+	for (long long int i = 0; i < arr.size(); i++)
+	{
+		cout << " - " << arr[i] << endl;
+	}
+
+	cout << "========" << endl;
+
+	for ( long long int i = 0; i < arr1.size(); i++)
+	{
+		cout <<" - "<< arr1[i] << endl;
+	}
+	cout << clockend << " time " << endl;
+
+	return 0;
+}
